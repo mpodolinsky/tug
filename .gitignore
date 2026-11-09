@@ -1,0 +1,20 @@
+__pycache__/
+.pytest_cache/
+*.egg-info/
+# data stays local
+data/*/*
+!data/README.md
+# results stay local until the final ones are committed on purpose
+results/*
+!results/README.md
+# working documents, kept on disk only
+TESTS.md
+REVIEW_pure_logic.md
+WORKLOG.md
+# the paper's Overleaf clone lives in notes/ (its own git repository)
+notes/
+# reference documentation, kept on disk only (the figure of the README stays)
+docs/*
+!docs/assets/
+# one-off validation scripts against the earlier pipeline, kept on disk only
+checks/

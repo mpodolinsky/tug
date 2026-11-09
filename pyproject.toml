@@ -1,0 +1,27 @@
+[project]
+name = "vla-probe"
+version = "0.1.0"
+description = "Early failure detection for VLA policies: probes, baselines, calibration and evaluation"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "numpy<2",
+    "scipy",
+    "scikit-learn",
+    "torch==2.7.1",
+    "matplotlib",
+    "huggingface_hub",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+hub = ["safetensors"]  # only to export the models for scripts/push_models_to_hub.py (and to run its tests)
+targets = ["transformers"]  # only to rebuild targets.npz (CLIP text embeddings) and task_embeddings.npz (Qwen3 embeddings)
+
+[tool.setuptools.packages.find]
+include = ["fp*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"

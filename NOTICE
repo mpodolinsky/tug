@@ -1,0 +1,37 @@
+Third-party code
+================
+
+SAFE (Gu et al., NeurIPS 2025, arXiv 2506.09937; https://github.com/vla-safe/SAFE)
+
+    fp/baselines/distance.py     compute_mahala_dist, compute_euclid_dist and compute_dist_closest_k_by_chunk are copied from
+                                 failure_prob/model/embed.py; the fitting and scoring logic follows EmbedModel in the same file.
+    fp/calibration/safe_band.py  port of the one-sided functional conformal band in
+                                 failure_prob/utils/conformal/functional_predictor.py.
+    fp/models/safe.py            SafeMLP and SafeLSTM follow IndepModel (failure_prob/model/indep.py) and LstmModel
+                                 (failure_prob/model/lstm.py) in their default configuration; parameter names are SAFE's.
+    fp/train/safe.py             the losses, class weights and L2 penalty follow forward_compute_loss in indep.py and lstm.py,
+                                 aggregate_monitor_loss in failure_prob/model/utils.py, compute_regularization_loss in
+                                 failure_prob/model/base.py and RolloutDataset in failure_prob/data/utils.py.
+    fp/baselines/safe_grid.py    the learning-rate and lambda_reg grids are those of scripts/batch_training/submit_pi0fast_libero.bash.
+    fp/baselines/stac.py         the all-dimension STAC and STAC-Single follow compute_stac_metrics and compute_stac_metrics_single in
+                                 failure_prob/utils/failure_metrics.py (written independently; the tests compare the two).
+
+The SAFE repository does not state a licence.
+
+ActProbe (Huang et al., NeurIPS 2026; https://github.com/air-embodied-brain/actprobe)
+
+The repository's LICENSE file is the Apache License 2.0 boilerplate notice with the copyright holder left blank ("Copyright [yyyy] [name of
+copyright owner]"); it does not contain the full licence text. The files below are ported on the strength of that notice, and the Apache-2.0
+terms (https://www.apache.org/licenses/LICENSE-2.0) are assumed to apply. To be confirmed with the authors before publication.
+
+    fp/baselines/actprobe.py     ActProbeNet is ported from benchmarks/pi0_libero/code/lib/methods/actprobe.py; the two features follow
+                                 scripts/collect/extract_features.py; the training recipe and the q-AUC selection metric follow
+                                 code/train/train_actprobe.py and lib_shared/metrics.py. Changes: the network and metric are
+                                 restructured to the interfaces of this repository; the checkpoint selection and patience are unchanged.
+    fp/data/task_embeddings.py   reads the task vectors ActProbe ships (benchmarks/pi0_libero/data) when asked to use them.
+
+STAC (Agia et al., CoRL 2024; https://github.com/agiachris/sentinel), MIT
+
+    fp/baselines/stac.py         the dimension variants follow the settings "mmd_rbf_all_1.0" and "mmd_rbf_pos" of
+                                 sentinel/bc/evaluate_ood_detectors.py. No code is copied; tests/test_stac.py runs their functions
+                                 from a local checkout to compare.
